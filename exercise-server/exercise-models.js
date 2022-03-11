@@ -47,11 +47,19 @@ const findExercise = async function (data) {
   return doc;
 };
 
-const replaceExercise = async function (_id, data) {
-  const { ...rest } = data;
-  const result = await Exercise.replaceOne({ _id: _id }, { ...rest });
+const replaceExercise = async function (_id, name, reps, weight, unit, date) {
+  const result = await Exercise.replaceOne(
+    { _id: _id },
+    { name, reps, weight, unit, date }
+  );
 
   return result.modifiedCount;
 };
 
-module.exports = { createExercise, findExercise, replaceExercise };
+const deleteById = async function (_id) {
+  const result = await Exercise.deleteOne({ _id: _id });
+
+  return result.deletedCount;
+};
+
+module.exports = { createExercise, findExercise, replaceExercise, deleteById };
