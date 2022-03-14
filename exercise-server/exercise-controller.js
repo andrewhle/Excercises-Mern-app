@@ -6,7 +6,6 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//------------Creating new exercise--------------
 app.post("/exercises", (req, res) => {
   exercise
     .createExercise(req.body)

@@ -1,7 +1,9 @@
 import React from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 
-function ExerciseList({ exercises }) {
+function ExerciseList({ exercises, onDelete, onEdit }) {
+  //this format date in form mm/dd/yy
+  const options = { month: "numeric", day: "numeric", year: "2-digit" };
   return (
     <table className="exercises">
       <thead>
@@ -23,12 +25,14 @@ function ExerciseList({ exercises }) {
             <td>{exercise.reps}</td>
             <td>{exercise.weight}</td>
             <td>{exercise.unit}</td>
-            <td>{exercise.date}</td>
             <td>
-              <MdEdit />
+              {new Date(exercise.date).toLocaleDateString("en-US", options)}
             </td>
             <td>
-              <MdDelete />
+              <MdEdit onClick={() => onEdit(exercise)} />
+            </td>
+            <td>
+              <MdDelete onClick={() => onDelete(exercise._id)} />
             </td>
           </tr>
         ))}
